@@ -216,7 +216,8 @@ I *never* want whitespace at the end of lines. Remove it on save.
 
 Install =all-the-icons= package
 #+BEGIN_SRC emacs-lisp
-  (use-package all-the-icons)
+    (use-package all-the-icons
+      :if (display-graphic-p))
 #+END_SRC
 
 Now, let's install =Projectile=
@@ -225,7 +226,7 @@ Now, let's install =Projectile=
   (use-package projectile
     :config
     (global-set-key (kbd "C-c p") 'projectile-command-map)
-    (setq projectile-project-search-path '("~/"))
+    (setq projectile-project-search-path '(("~/Projects" . 4)))
     (projectile-discover-projects-in-search-path))
 #+END_SRC
 
@@ -249,7 +250,7 @@ Let's use Treemacs
       :after treemacs projectile
       :ensure t
       :config
-      ;(treemacs-add-and-display-current-project)
+      (treemacs-add-and-display-current-project)
   )
     (use-package treemacs-magit)
     (use-package lsp-treemacs)
@@ -495,7 +496,7 @@ I'd like doom-themes
     :config
     (setq doom-themes-enable-bold t
           doom-themes-enable-italic t)
-    (load-theme 'doom-outrun-electric t)
+    (load-theme 'doom-one t) ;doom-outrun-electric
     (doom-themes-visual-bell-config)
     (doom-themes-neotree-config)
     (setq doom-themes-treemacs-theme "doom-atom")
@@ -522,11 +523,12 @@ I also like Solarized.
 #+END_SRC
 
 Set a nice font.
+You need to run =M-x all-the-icons-install-fonts=
 
 #+BEGIN_SRC emacs-lisp
-  ;; (set-frame-font "Operator Mono 12" nil t)
-  ;; (set-frame-font "Inconsolata 13" nil t)
-  ;; (set-frame-font "SF Mono 12" nil t)
+   ;(set-frame-font "Operator Mono 12" nil t)
+   ;(set-frame-font "Inconsolata 13" nil t)
+   ;(set-frame-font "SF Mono 12" nil t)
 #+END_SRC
 
 =feebleline= is a minimalist mode line replacement.
